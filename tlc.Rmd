@@ -19,16 +19,39 @@ options(htmltools.dir.version = FALSE)
 
 [The Central Limit Theorem and its misuse](https://lambdaclass.com/data_etudes/central_limit_theorem_misuse/)
 
-```{r fig-nocap-margin-first, fig.margin=TRUE, fig.width=4, fig.height=4, cache=TRUE, echo=FALSE}
-library(ggplot2)
-ggplot(mtcars, aes(wt, mpg)) + geom_point(size=3, aes(colour=factor(cyl))) + theme(legend.position="none")
+# Preámbulos
+
+El teorema del límite central (TCL) es, posiblemente, uno de los teoremas fundamentales en la estadística y se usa ampliamente en cualquier campo en el que se quiera inferir algo o hacer predicciones a partir de los datos recopilados. Una primera versión (simple) fue introducida en el siglo XVIII, primero por De Moivre y luego, de una manera más refinada por Laplace, pero no fue hasta alrededor de 1935 cuando se publicó el teorema tal y como lo conocemos hoy. El objetivo de estas **notas con fines didácticos** es explicar, en términos generales lo que dice y, lo que es más importante, _lo que no dice_.
+
+```{r fig-nocap-margin-first, fig.cap="Simulaciones de una distribución normal para diferentes valores de n", fig.margin=TRUE, fig.width=4, fig.height=4, cache=TRUE, echo=FALSE}
+# Fix seed, set constants
+set.seed(2006)
+sample_sizes <- c(1, 10, 30, 1000)
+nsims <- 10000
+# Helper function: Mean of one sample of X
+one_mean <- function(n, p = c(0.8, 0.2)) {
+  mean(sample(0:1, n, replace = TRUE, prob = p))
+}
+# one_mean(10)
+# Simulate and plot
+par(mfrow = c(2, 2), mai = rep(0.4, 4))
+for (n in sample_sizes) {
+  means <- replicate(nsims, one_mean(n))
+  hist(means, breaks = "FD", 
+       # xlim = 0:1, # uncomment for LLN
+       main = sprintf("n=%i", n))
+}
 ```
 
-# 
+De manera informal, el teorema establece que si tomamos muestras aleatorias de una determinada distribución y luego las promediamos, el resultado (es decir, la media de la muestra) se parecerá a una distribución normal cuantas más muestras tomemos. De forma más precisa, si ${X_{1},...,X_{n},...}$ son variables aleatorias independientes e idénticamente distribuidas *(i.i.d)* y $\overline{X}_{n}=\big(X_{1}+...+X_{n}\big)/n$ es la media muestral, su normalización (estandarización) $$\frac{\overline{X}_{n}-E(\overline{X}_{n})}{\sqrt{Var(\overline{X}_{n})}}$$ 
+converge (en distribución) con una distribución normal estándar $N(0,1)$.
 
-El teorema del límite central (TCL) es, posiblemente, uno de los teoremas más famosos de la estadística, y se usa ampliamente en cualquier campo en el que se quiera inferir algo o hacer predicciones a partir de los datos recopilados. Una primera versión (simple) fue introducida en el siglo XVIII, primero por De Moivre y luego, de una manera más refinada por Laplace, pero no fue hasta alrededor de 1935 cuando se publicó el teorema tal y como lo conocemos hoy. El objetivo de estas **notas con fines didácticos** es explicar, en términos generales lo que dice y, lo que es más importante, _lo que no dice_.
+```{r fig-nocap-margin-second, fig.cap="Simulaciones de una distribución normal con media y varianzas diferentes", fig.margin=TRUE, fig.width=3.5, fig.height=3.5, cache=TRUE, echo=FALSE}
+library(pdplot2)
+pdplot2(seq(-5, 5, 0.01), mean=c(0,0,0), sd=c(1,1.5,2), type="normal", show.color=TRUE)
+```
 
-De manera informal, el teorema establece que si tomamos muestras aleatorias de una determinada distribución y luego las promediamos, el resultado (es decir, la media de la muestra) se parecerá a una distribución normal cuantas más muestras tomemos. De forma más precisa, si ${X_{1},...,X_{n},...}$ son variables aleatorias independientes e idénticamente distribuidas *(i.i.d)* y $\overline{X}_{n}=\big(X_{1}+...+X_{n}\big)/n$ es la media muestral, su normalización (estandarización) $\frac{\overline{X}_{n}-E(\overline{X}_{n})}{\sqrt{Var(\overline{X}_{n})}}$ converge (en distribución) con una distribución normal estándar $N(0,1)$.
+Otra forma de decir esto es que, a medida que $n$ aumenta, la "diferencia"
 
 [tint](http://github.com/eddelbuettel/tint) is straightforward mix of the (html and pdf
 parts of the) excellent [tufte](https://github.com/rstudio/tufte) package by JJ and Yihui,
