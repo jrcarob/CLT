@@ -11,15 +11,11 @@ kramdown:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
 ## Un análisis basado en:
 
 https://lambdaclass.com/data_etudes/central_limit_theorem_misuse/
 
-The Central Limit Theorem (CLT) is possibly the most famous theorem in all of statistics, being widely used in any field that wants to infer something or make predictions from gathered data. A first (simple) version of it was introduced in the eighteenth century, first by de Moivre and then later in a more refined way by Laplace, but it wasn't until around 1935 that the theorem as we know it today was published. The goal of these notes is to explain in broad terms what it says and, more importantly, what it doesn't.
+El teorema del límite central (TCL) es, posiblemente, uno de los teoremas más famosos de toda la estadística, y se usa ampliamente en cualquier campo en el que se quiera inferir algo o hacer predicciones a partir de los datos recopilados. Una primera versión (simple) fue introducida en el siglo XVIII, primero por De Moivre y luego de una manera más refinada por Laplace, pero no fue hasta alrededor de 1935 que se publicó el teorema tal y como lo conocemos hoy. El objetivo de estas notas didácticas es explicar, en términos generales lo que dice y, lo que es más importante, *lo que no dice*.
 
-Informally, the theorem states that if we take random samples of a certain distribution and then average them, the result (i.e the sample mean) will resemble a normal distribution the more samples we take.
+De manera informal, el teorema establece que si tomamos muestras aleatorias de una determinada distribución y luego las promediamos, el resultado (es decir, la media de la muestra) se parecerá a una distribución normal cuantas más muestras tomemos. De forma más precisa, si ${X_{1},...,X_{n},...}$ son variables aleatorias independientes e idénticamente distribuidas *(i.i.d)* y $\overline{X}_{n}=\big(X_{1}+...+X_{n}\big)/n$ es la media muestral, su normalización (estandarización) $\dfrac{\overline{X}_{n}-E(\overline{X}_{n})}{\sqrt{Var(\overline{X}_{n})}}$ converge (en distribución) con una distribución normal estándar $N(0,1)$.
 
-$\frac{x}{2\sigma}$
-
-$$f(x)$$
