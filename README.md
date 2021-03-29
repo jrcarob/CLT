@@ -2,4 +2,4 @@
 
 El Teorema del Límite Central
 
-https://github.com/jrcarob/TLC/tlc.html
+https://jrcarob.github.io/TLC/tlc.html
