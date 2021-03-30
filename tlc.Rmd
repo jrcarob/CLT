@@ -15,7 +15,7 @@ knitr::opts_chunk$set(tidy = FALSE, cache.extra = packageVersion('tint'))
 options(htmltools.dir.version = FALSE)
 ```
 
-## Un Análisis basado en:
+## Un análisis basado en:
 
 [The Central Limit Theorem and its misuse](https://lambdaclass.com/data_etudes/central_limit_theorem_misuse/)
 
@@ -43,7 +43,7 @@ for (n in sample_sizes) {
 }
 ```
 
-De manera informal, el teorema establece que si tomamos muestras aleatorias de una determinada distribución y luego las promediamos, el resultado (es decir, la media de la muestra) se parecerá a una distribución normal cuantas más muestras tomemos. De forma más precisa, si ${X_{1},...,X_{n},...}$ son variables aleatorias independientes e idénticamente distribuidas *(i.i.d)* y $\overline{X}_{n}=\big(X_{1}+...+X_{n}\big)/n$ es la media muestral, su normalización (estandarización) $$\frac{\overline{X}_{n}-E(\overline{X}_{n})}{\sqrt{Var(\overline{X}_{n})}}$$ 
+De manera informal, el teorema establece que si tomamos muestras aleatorias de una determinada distribución y luego las promediamos, el resultado (es decir, la media de la muestra) se parecerá a una distribución normal cuantas más muestras tomemos. De forma más precisa, si ${X_{1},...,X_{n},...}$ son variables aleatorias _independientes e idénticamente distribuidas (i.i.d)_ y $\overline{X}_{n}=\big(X_{1}+...+X_{n}\big)/n$ es la media muestral, su normalización (estandarización) $$\frac{\overline{X}_{n}-E(\overline{X}_{n})}{\sqrt{Var(\overline{X}_{n})}}$$ 
 converge (en distribución) con una distribución normal estándar $N(0,1)$.
 
 ```{r fig-nocap-margin-second, fig.cap="Simulaciones de una distribución normal con media y varianzas diferentes", fig.margin=TRUE, fig.width=3.5, fig.height=3.5, cache=TRUE, echo=FALSE}
@@ -51,9 +51,11 @@ library(pdplot2)
 pdplot2(seq(-5, 5, 0.01), mean=c(0,0,0), sd=c(1,1.5,2), type="normal", show.color=TRUE)
 ```
 
-Otra forma de decir esto es que, a medida que $n$ aumenta, la "diferencia" entre la distribución de $\overline{X}_{n}$ y una distribución normal $N(E(\overline{X}_{n}),Var(\overline{X}_{n}))$ tiende a cero.
+Otra forma de decir esto es que, a medida que $n$ aumenta, la "diferencia" entre la distribución de $\overline{X}_{n}$ y una distribución normal $N(E(\overline{X}_{n}),Var(\overline{X}_{n}))$ tiende a cero. Conviene apreciar que al ser las variables _i.i.d._, $E(\overline{X}_{n})$ es lo mismo que la esperanza de cualquiera de las $X_{i}$ y que la $Var(\overline{X}_{n})$ es la misma que $\frac{Var(X_{i})}{n}$. Mediante un cálculo simple, se puede comprobar que el teorema es igual si reemplazamos todas las instancias de $\overline{X}_{n}$ con la suma $S_{n}=X_{1}+X_{2}+\cdots X_{n}$.
 
-[tint](http://github.com/eddelbuettel/tint) is straightforward mix of the (html and pdf parts of the) excellent [tufte](https://github.com/rstudio/tufte) package by JJ and Yihui, mixed with the [Roboto Condensed](https://fonts.google.com/specimen/Roboto+Condensed) font use and color scheme proposed by [envisioned css](https://github.com/nogginfuel/envisioned-css) plus minor style changes such as removal of _italics_---but otherwise true to the wonderful [tufte](https://github.com/rstudio/tufte) package for R---all baked together into a small package providing another template.
+El ejemplo más común que se suele ver del TLC en acción es cuando se considera una distribución binomial. Supongamos que lanzamos una moneda $n$ veces y contamos el _número de caras_ obtenidas; podemos pensar en esto como la suma de
+$n$ variables aleatorias independientes, $X$, con una distribución de Bernoulli, $X_{i}\sim Be(1/2)$ (suponiendo que la moneda no está trucada, obviamente). Entonces, el TLC nos dice que _a medida que_ $n$ _aumenta podemos aproximar el número de caras_ $S_{n}=X_{1}+X_{2}+\cdots X_{n}$ a una distribución normal con media $n/2$ y desviación típica $\sqrt{n/4}$.
+
 
 We support _italic_ aka *em* and **strong** annotations for text, as well as `code` snippets.
 
